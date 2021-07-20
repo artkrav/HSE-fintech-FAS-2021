@@ -1,0 +1,58 @@
+use_mlflow: True
+mlflow_server: file:/home/jovyan/mlruns
+experiment_name: hse_talk_single_dom_discr
+run_name: protocol4_single_dom_discr_manbin_sampling_CUDNNre
+model_dir: /home/jovyan/hse_talk_models
+
+## ---- model settings ----
+
+seed: 42
+encoder_type: resnet50
+dropout_rate: 0.25
+revgrad_lambda: 0.2
+num_domains: 3
+
+## ---- dataset settings ----
+
+train_batch_size: 96
+dev_batch_size: 96
+test_batch_size: 96
+num_workers: 5
+
+root_dir: '/home/jovyan/paper_data/'
+crops_folder: 'paper_data_crops_15022021'
+
+train_split: '/home/jovyan/paper_splits/protocol/protocol4_train_IMC_10032021.csv'
+dev_split: '/home/jovyan/paper_splits/protocol/protocol4_dev_IMC_17022021.csv'
+test_split: '/home/jovyan/paper_splits/protocol/protocol4_test_O_17022021.csv'
+
+eqbinary_sample_data: True
+eqmulti_sample_data: False
+
+image_size: [300, 300] 
+crop_size: [224, 224]
+
+## ---- training settings ----
+
+epochs: 100
+keep_checkpoints: 20
+
+## ---- loss settings ----
+
+cls_loss_type: bce
+ccdd_loss_type: cross_entropy
+ccdd_lambda: 1
+
+## ---- optimizer settings ----
+
+optimizer_class: torch.optim.SGD
+optimizer_hyperparams: 
+  lr: 0.0003
+  momentum: 0.9
+  weight_decay: 0.00001
+  nesterov: True
+
+scheduler: constant
+
+
+
